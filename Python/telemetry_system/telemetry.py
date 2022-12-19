@@ -1,4 +1,5 @@
-from client import TelemetryClient
+from telemetry_system.client import TelemetryClient
+
 
 class TelemetryDiagnostics:
     DiagnosticChannelConnectionString = "*111#"
