@@ -1,11 +1,15 @@
+import random
 import unittest
 
 from telemetry import *
 
-class TelemetryDiagnosticControlsTest(unittest.TestCase):
-    def test_foo(self):
+class TestTelemetryDiagnosticControlsTest():
+    def test_foo(self, monkeypatch):
+        def return_one(x, y):
+            return 1
+        monkeypatch.setattr(random, 'randint', return_one)
         diagnostics = TelemetryDiagnostics()
-        self.assertEqual("foo", diagnostics.diagnostic_info)
-        
+        diagnostics.check_transmission()
+
 if __name__ == "__main__":
     unittest.main()
