@@ -1,5 +1,6 @@
 import random
 
+
 class TelemetryClient(object):
 
     # The communication with the server is simulated in this implementation.
@@ -16,7 +17,10 @@ class TelemetryClient(object):
         return self._online_status
 
     def connect(self, telemetry_server_connection_string):
-        if (telemetry_server_connection_string is None or telemetry_server_connection_string == ""):
+        if (
+            telemetry_server_connection_string is None
+            or telemetry_server_connection_string == ""
+        ):
             raise Exception()
 
         # Fake the connection with 20% chances of success
@@ -28,19 +32,18 @@ class TelemetryClient(object):
         self._online_status = False
 
     def send(self, message):
-        if (message is None or message == ""):
+        if message is None or message == "":
             raise Exception()
 
         # The simulation of Send() actually just remember if the last message sent was a diagnostic message.
         # This information will be used to simulate the Receive(). Indeed there is no real server listening.
-        if (message == TelemetryClient.DIAGNOSTIC_MESSAGE):
+        if message == TelemetryClient.DIAGNOSTIC_MESSAGE:
             self._diagnosticMessageJustSent = True
         else:
             self._diagnosticMessageJustSent = False
 
-
     def receive(self):
-        if (self._diagnosticMessageJustSent):
+        if self._diagnosticMessageJustSent:
             # Simulate the reception of the diagnostic message
             message = """\
 LAST TX rate................ 100 MBPS\r\n
@@ -63,7 +66,7 @@ Remote Rtrn Count........... 00"""
             message = ""
             messageLength = random.randint(0, 50) + 60
             i = messageLength
-            while(i >= 0):
+            while i >= 0:
                 message += chr((random.randint(0, 40) + 86))
                 i -= 1
 

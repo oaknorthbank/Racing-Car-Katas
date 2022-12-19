@@ -2,6 +2,7 @@ class TurnTicket(object):
     def __init__(self, turnNumber):
         self.turnNumber = turnNumber
 
+
 class TurnNumberSequence(object):
     _turnNumber = -1
 
